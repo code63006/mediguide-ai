@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, MapPin, Clock, AlertTriangle, Phone, Star, Navigation, Mic, MicOff, Send, Bot, User, Activity } from 'lucide-react';
-import { db } from './firebase';
+import { db, initializeDoctors } from './firebase';
 import Map from './components/Map';
+
+// Initialize sample doctors data
+initializeDoctors();
 
 // Symptom to specialist mapping database
 const symptomSpecialistMapping = {
@@ -57,7 +60,7 @@ const mockDoctors = [
   { id: 10, name: 'Dr. Richard Taylor', specialty: 'Endocrinologist', rating: 4.7, distance: '1.5 km', phone: '+1234567899', lat: 37.7749, lng: -122.3994 }
 ];
 
-const MediGuideAI = () => {
+const App = () => {
   const [symptoms, setSymptoms] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
@@ -437,7 +440,13 @@ const MediGuideAI = () => {
         )}
 
         {/* Map Tab */}
-          {activeTab === 'map' && <Map doctors={nearbyDoctors} userLocation={userLocation} />}
+          {activeTab === 'map' && (
+            <Map 
+              specialty={analysis?.specialist} 
+              userLocation={userLocation} 
+              isEmergency={analysis?.urgency === 'emergency'} 
+            />
+          )}
       </div>
 
       {/* Emergency Banner */}
@@ -467,4 +476,4 @@ const MediGuideAI = () => {
  );
 };
 
-export default MediGuideAI;
+export default App;
