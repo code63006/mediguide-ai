@@ -1,6 +1,6 @@
 # 🏥 MediGuide AI - Healthcare Assistant
 
-## 🚀 **Hackathon-Winning Features**
+## 🚀 **Features**
 
 - **AI-Powered Symptom Analysis** - Advanced NLP for 25+ medical conditions
 - **Voice Recognition** - Speak your symptoms hands-free
